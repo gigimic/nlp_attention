@@ -5,3 +5,5 @@ Here we look at how attention is implemented. We will focus on implementing atte
 
 We will implement attention scoring and calculate an attention context vector.
 
+We tried to calculate the annotation score with a single encoder hidden state and also 
+with an annotation matrix. The dot() function of numpy was used here.
