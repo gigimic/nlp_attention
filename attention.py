@@ -43,3 +43,24 @@ def dot_attention_score(dec_hidden_state, annotations):
     
 attention_weights_raw = dot_attention_score(dec_hidden_state, annotations)
 print('attention score matrix  ', attention_weights_raw)
+
+# Apply the softmax function
+
+def softmax(x):
+    x = np.array(x, dtype=np.float128)
+    e_x = np.exp(x)
+    return e_x / e_x.sum(axis=0) 
+
+attention_weights = softmax(attention_weights_raw)
+
+# softmax makes the scores drastically different and we understand very which score is more important.
+print('after applying softmax function   ', attention_weights)
+
+# apply the score back on annotations
+def apply_attention_scores(attention_weights, annotations):
+    # Multiply the annotations by their weights
+    return attention_weights * annotations
+
+applied_attention = apply_attention_scores(attention_weights, annotations)
+print('after applying the score on annotations  ', applied_attention)
+
